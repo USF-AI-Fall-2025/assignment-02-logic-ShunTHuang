@@ -27,6 +27,7 @@ class DataInvestigator:
         except:
             return None
 
+
     def zeroR(self, col):
         return self.baseline(col)
 
