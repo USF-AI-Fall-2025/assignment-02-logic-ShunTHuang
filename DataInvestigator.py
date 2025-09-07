@@ -15,6 +15,7 @@ class DataInvestigator:
         except:
             return None
 
+
     def corr(self, col1, col2):
         if self.df is None: return None
 
