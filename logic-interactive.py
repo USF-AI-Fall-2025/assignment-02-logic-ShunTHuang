@@ -306,6 +306,34 @@ def interactive_system():
         elif cmd.startswith("ask "): kb.ask(cmd[4:].strip())
         else: print("Use: tell <stmt>, ask <stmt>, clear, exit")
 
-if __name__ == "__main__":
-    interactive_system()
 
+test_cases = [
+    ["tell a", "tell not a", "clear"],
+    ["tell a or b", "tell a", "ask b", "clear"],
+    ["tell a and b and c", "tell a", "ask b", "ask c", "clear"],
+
+    # error case found
+    ["tell a or b", "tell not a", "ask b", "clear"],
+    ["tell a or b and c", "tell not a", "ask b and c", "clear"],
+    ["tell a implies f", "tell not a", "ask f", "clear"],
+    ["tell p implies not q", "tell q", "ask p", "clear"],
+    ["tell x implies p implies q", "tell x", "ask p implies q", "clear"],
+    ["tell a implies f", "tell not a", "ask f", "clear"],
+    ["tell not p", "tell not r", "ask p implies q implies r", "clear"],
+    ["tell p IMPLIES q", "ask p", "ask q", "clear"],
+    ["tell b implies f", "tell a implies f", "tell not a", "tell b", "ask f", "clear"],
+]
+
+def unit_test():
+    kb = KnowledgeBase()
+    for case in test_cases:
+        print(f"Testing : {case}")
+        for expr in case:
+            if expr == "clear": kb.clear()
+            elif expr.startswith("tell "): kb.tell(expr[5:].strip())
+            elif expr.startswith("ask "): kb.ask(expr[4:].strip())
+        print()
+
+if __name__ == "__main__":
+    unit_test()
+    # interactive_system()
