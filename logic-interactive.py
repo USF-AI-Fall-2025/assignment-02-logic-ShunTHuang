@@ -314,13 +314,12 @@ test_cases = [
 
     # error case found
     ["tell a or b", "tell not a", "ask b", "clear"],
-    ["tell a or b and c", "tell not a", "ask b and c", "clear"],
+    ["tell p IMPLIES q", "ask p", "ask q", "clear"],
     ["tell a implies f", "tell not a", "ask f", "clear"],
     ["tell p implies not q", "tell q", "ask p", "clear"],
-    ["tell x implies p implies q", "tell x", "ask p implies q", "clear"],
-    ["tell a implies f", "tell not a", "ask f", "clear"],
+    ["tell a or b and c", "tell not a", "ask b and c", "clear"],
     ["tell not p", "tell not r", "ask p implies q implies r", "clear"],
-    ["tell p IMPLIES q", "ask p", "ask q", "clear"],
+    ["tell x implies p implies q", "tell x", "ask p implies q", "clear"],
 ]
 
 def unit_test():
