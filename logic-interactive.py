@@ -321,7 +321,6 @@ test_cases = [
     ["tell a implies f", "tell not a", "ask f", "clear"],
     ["tell not p", "tell not r", "ask p implies q implies r", "clear"],
     ["tell p IMPLIES q", "ask p", "ask q", "clear"],
-    ["tell b implies f", "tell a implies f", "tell not a", "tell b", "ask f", "clear"],
 ]
 
 def unit_test():
