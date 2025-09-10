@@ -313,13 +313,13 @@ test_cases = [
     ["tell a and b and c", "tell a", "ask b", "ask c", "clear"],
 
     # error case found
-    ["tell a or b", "tell not a", "ask b", "clear"],
-    ["tell p IMPLIES q", "ask p", "ask q", "clear"],
-    ["tell a implies f", "tell not a", "ask f", "clear"],
-    ["tell p implies not q", "tell q", "ask p", "clear"],
-    ["tell a or b and c", "tell not a", "ask b and c", "clear"],
-    ["tell not p", "tell not r", "ask p implies q implies r", "clear"],
-    ["tell x implies p implies q", "tell x", "ask p implies q", "clear"],
+    ["tell a or b", "tell not a", "ask b", "correct: b = true", "clear"],
+    ["tell p IMPLIES q", "ask p", "ask q", "correct: should know IMPLIES", "clear"],
+    ["tell a implies f", "tell not a", "ask f", "correct: Unknown f", "clear"],
+    ["tell p implies not q", "tell q", "ask p", "correct: p = false", "clear"],
+    ["tell a or b and c", "tell not a", "ask b and c", "correct: b and c = true", "clear"],
+    ["tell not p", "tell not r", "ask p implies q implies r", "correct: (p implies (q implies r)) = True", "clear"],
+    ["tell x implies p implies q", "tell x", "ask p implies q", "correct: (x implies (p implies q)), p implies q = true", "clear"],
 ]
 
 def unit_test():
@@ -330,6 +330,7 @@ def unit_test():
             if expr == "clear": kb.clear()
             elif expr.startswith("tell "): kb.tell(expr[5:].strip())
             elif expr.startswith("ask "): kb.ask(expr[4:].strip())
+            else: print(expr)
         print()
 
 if __name__ == "__main__":
